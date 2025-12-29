@@ -240,6 +240,9 @@ function loadGameData() {
 
 		if (foundGame) {
 			game = foundGame;
+			// 从游戏数据恢复赏金记录
+			bountyRecords = game.bountyRecords || [];
+			bountyPool = game.bountyPool || 0;
 			showGameManagement();
 		} else {
 			console.error("游戏不存在");
@@ -418,6 +421,9 @@ function confirmBounty() {
 		bountyRecords.push(bountyRecord);
 		bountyPool += bountyAmount;
 
+		// 保存赏金记录到游戏数据
+		saveGameState();
+
 		// 更新赏金记录显示
 		renderBountyRecords();
 
@@ -472,6 +478,10 @@ function deleteBountyRecord(recordId) {
 			const record = bountyRecords[recordIndex];
 			bountyPool = Math.max(0, bountyPool - record.amount);
 			bountyRecords.splice(recordIndex, 1);
+
+			// 保存游戏状态
+			saveGameState();
+
 			renderBountyRecords();
 			showToast("删除成功", "success");
 		}
@@ -505,6 +515,23 @@ function showModal(title, body, confirmCallback) {
 // 关闭模态框
 function closeModal() {
 	document.getElementById("modal").classList.remove("show");
+}
+
+// 保存游戏状态到本地存储
+function saveGameState() {
+	try {
+		const allGames = storage.getStorageData("games", []);
+		const gameIndex = allGames.findIndex((g) => g._id === gameId);
+
+		if (gameIndex !== -1) {
+			// 更新游戏的赏金记录和赏金池
+			allGames[gameIndex].bountyRecords = bountyRecords;
+			allGames[gameIndex].bountyPool = bountyPool;
+			storage.setStorageData("games", allGames);
+		}
+	} catch (err) {
+		console.error("保存游戏状态失败:", err);
+	}
 }
 
 // 确认模态框操作
