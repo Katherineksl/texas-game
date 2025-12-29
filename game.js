@@ -190,8 +190,13 @@ function confirmPlayerSelection() {
 
 // 创建游戏
 function createGame() {
+	// 自动生成游戏名称
+	const allGames = storage.getStorageData("games", []);
+	const gameNumber = allGames.length + 1;
+	const gameName = `游戏${gameNumber}`;
+
 	const config = {
-		name: document.getElementById("gameName").value.trim(),
+		name: gameName,
 		maxPlayers: parseInt(document.getElementById("maxPlayers").value) || 5,
 		entryFee: parseInt(document.getElementById("entryFee").value) || 200,
 		initialScore:
@@ -202,11 +207,6 @@ function createGame() {
 		rewardRatios: document.getElementById("rewardRatios").value || "4:3:2:1",
 		penaltyRatios: document.getElementById("penaltyRatios").value || "2:3:5",
 	};
-
-	if (!config.name) {
-		showToast("请输入游戏名称", "error");
-		return;
-	}
 
 	const gameData = {
 		_id: Date.now().toString(),
