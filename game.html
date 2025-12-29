@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>德州扑克管理 - 游戏管理</title>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<nav class="navbar">
+			<div class="nav-container">
+				<h1 class="nav-title">德州扑克管理</h1>
+				<div class="nav-tabs">
+					<a href="index.html" class="nav-tab">游戏大厅</a>
+					<a href="game.html" class="nav-tab active">游戏管理</a>
+				</div>
+			</div>
+		</nav>
+
+		<div class="container">
+			<!-- 创建游戏表单 -->
+			<div class="card" id="createForm" style="display: none">
+				<div class="card-title">创建新游戏</div>
+
+				<div class="form-group">
+					<label class="label">游戏名称:</label>
+					<input class="input" id="gameName" placeholder="请输入游戏名称" />
+				</div>
+
+				<div class="form-group">
+					<label class="label">玩家人数:</label>
+					<input
+						class="input"
+						id="maxPlayers"
+						type="number"
+						placeholder="5-10"
+						value="5"
+					/>
+				</div>
+
+				<div class="form-group">
+					<label class="label">进场费用:</label>
+					<input
+						class="input"
+						id="entryFee"
+						type="number"
+						placeholder="200"
+						value="200"
+					/>
+				</div>
+
+				<div class="form-group">
+					<label class="label">初始积分:</label>
+					<input
+						class="input"
+						id="initialScore"
+						type="number"
+						placeholder="2000"
+						value="2000"
+					/>
+				</div>
+
+				<div class="form-group">
+					<label class="label">赏金奖励:</label>
+					<input
+						class="input"
+						id="bountyPerKill"
+						type="number"
+						placeholder="100"
+						value="100"
+					/>
+				</div>
+
+				<div class="form-group">
+					<label class="label">赏金上限:</label>
+					<input
+						class="input"
+						id="maxBounty"
+						type="number"
+						placeholder="600"
+						value="600"
+					/>
+				</div>
+
+				<div class="form-group">
+					<label class="label">奖励比例:</label>
+					<input
+						class="input"
+						id="rewardRatios"
+						placeholder="4:3:2:1 (前4名奖励)"
+						value="4:3:2:1"
+					/>
+				</div>
+
+				<div class="form-group">
+					<label class="label">惩罚比例:</label>
+					<input
+						class="input"
+						id="penaltyRatios"
+						placeholder="2:3:5 (后3名惩罚)"
+						value="2:3:5"
+					/>
+				</div>
+
+				<button class="btn" onclick="createGame()">创建游戏</button>
+			</div>
+
+			<!-- 玩家选择界面 -->
+			<div class="card" id="playerSelection" style="display: none">
+				<div class="card-title">选择默认玩家</div>
+				<div class="card-content">
+					请选择要添加的玩家（可多选），或直接添加新玩家
+				</div>
+
+				<div class="player-selection-grid" id="defaultPlayersGrid">
+					<!-- 默认玩家将在这里动态生成 -->
+				</div>
+
+				<!-- 自定义玩家输入区域 -->
+				<div class="custom-player-section">
+					<div class="custom-player-input-container">
+						<input
+							class="custom-player-input"
+							id="customPlayerName"
+							placeholder="输入新玩家昵称"
+						/>
+						<button class="btn-add-custom" onclick="addCustomPlayer()">
+							添加
+						</button>
+					</div>
+
+					<!-- 自定义玩家列表 -->
+					<div id="customPlayersSection" style="display: none">
+						<div class="card-content">新添加的玩家：</div>
+						<div class="player-selection-grid" id="customPlayersGrid">
+							<!-- 自定义玩家将在这里动态生成 -->
+						</div>
+					</div>
+				</div>
+
+				<div class="player-selection-actions">
+					<button class="btn btn-secondary" onclick="skipPlayerSelection()">
+						跳过
+					</button>
+					<button class="btn" onclick="confirmPlayerSelection()">
+						确认选择
+					</button>
+				</div>
+			</div>
+
+			<!-- 游戏管理界面 -->
+			<div id="gameManagement" style="display: none">
+				<div class="card">
+					<div class="card-title" id="gameTitle"></div>
+					<div class="card-content" id="gameInfo"></div>
+
+					<!-- 玩家列表 -->
+					<div class="players-section">
+						<div class="section-title">玩家列表</div>
+						<div id="loadingPlayers" class="loading">加载中...</div>
+						<div id="playersList">
+							<!-- 玩家列表将在这里动态生成 -->
+						</div>
+
+						<div class="player-actions-row">
+							<button
+								id="addPlayerBtn"
+								class="btn btn-secondary"
+								onclick="addPlayer()"
+							>
+								手动添加玩家
+							</button>
+						</div>
+					</div>
+
+					<!-- 赏金记录 -->
+					<div id="bountySection" style="display: none">
+						<div class="section-title">赏金记录</div>
+						<div id="bountyList">
+							<!-- 赏金记录将在这里动态生成 -->
+						</div>
+					</div>
+
+					<!-- 赏金记录表单 -->
+					<div id="bountyForm" class="bounty-form" style="display: none">
+						<div class="card-title">记录赏金事件</div>
+
+						<div class="form-group">
+							<label class="label">猎杀者:</label>
+							<select class="input" id="killerSelect">
+								<!-- 玩家选项将在这里动态生成 -->
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label class="label">被猎杀者:</label>
+							<select class="input" id="killedSelect">
+								<!-- 玩家选项将在这里动态生成 -->
+							</select>
+						</div>
+
+						<div class="form-actions">
+							<button class="btn btn-secondary" onclick="hideBountyForm()">
+								取消
+							</button>
+							<button class="btn" onclick="confirmBounty()">确认记录</button>
+						</div>
+					</div>
+
+					<!-- 操作按钮 -->
+					<div class="actions-section">
+						<button class="btn btn-secondary" onclick="recordBounty()">
+							记录赏金
+						</button>
+						<button
+							id="settleBtn"
+							class="btn"
+							onclick="settleGame()"
+							style="display: none"
+						>
+							结算游戏
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 模态框 -->
+		<div id="modal" class="modal">
+			<div class="modal-content">
+				<div class="modal-title" id="modalTitle"></div>
+				<div id="modalBody"></div>
+				<div class="modal-actions">
+					<button class="btn btn-secondary" onclick="closeModal()">取消</button>
+					<button
+						class="btn"
+						id="modalConfirmBtn"
+						onclick="confirmModalAction()"
+					>
+						确认
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="storage.js"></script>
+		<script src="game.js"></script>
+	</body>
+</html>

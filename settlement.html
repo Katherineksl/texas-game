@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>德州扑克管理 - 游戏结算</title>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<nav class="navbar">
+			<div class="nav-container">
+				<h1 class="nav-title">德州扑克管理</h1>
+				<div class="nav-tabs">
+					<a href="index.html" class="nav-tab">游戏大厅</a>
+					<a href="game.html" class="nav-tab">游戏管理</a>
+				</div>
+			</div>
+		</nav>
+
+		<div class="container">
+			<!-- 准备结算 -->
+			<div id="preparationSection">
+				<div class="card">
+					<div class="card-title">准备结算</div>
+
+					<!-- 最终积分确认 -->
+					<div class="preparation-section">
+						<div class="section-title">最终积分确认</div>
+						<div id="finalScores" class="final-scores">
+							<!-- 玩家积分输入将在这里动态生成 -->
+						</div>
+					</div>
+
+					<!-- 吃饭费用输入 -->
+					<div class="preparation-section">
+						<div class="section-title">吃饭费用设置</div>
+						<div class="meal-inputs">
+							<div class="input-group">
+								<label class="input-label">总吃饭费用:</label>
+								<input
+									class="input-field"
+									type="number"
+									placeholder="0"
+									id="finalMealCost"
+									value="0"
+								/>
+								<span class="input-unit">元</span>
+							</div>
+							<div class="input-group">
+								<label class="input-label">饭费公共费用:</label>
+								<input
+									class="input-field"
+									type="number"
+									placeholder="10"
+									id="finalMealShareRatio"
+									value="10"
+								/>
+								<span class="input-unit">%</span>
+							</div>
+						</div>
+					</div>
+
+					<!-- 其他奖金输入 -->
+					<div class="preparation-section">
+						<div class="section-title">其他奖金设置</div>
+						<div class="meal-inputs">
+							<div class="input-group">
+								<label class="input-label">其他奖金:</label>
+								<input
+									class="input-field"
+									type="number"
+									placeholder="0"
+									id="otherBonus"
+									value="0"
+								/>
+								<span class="input-unit">元</span>
+							</div>
+						</div>
+					</div>
+
+					<button class="btn" onclick="startSettlement()">开始结算</button>
+				</div>
+			</div>
+
+			<!-- 结算概览 -->
+			<div id="summarySection" style="display: none">
+				<div class="card">
+					<div class="card-title">游戏结算</div>
+
+					<div class="settlement-summary" id="settlementSummary">
+						<!-- 结算摘要将在这里动态生成 -->
+					</div>
+
+					<!-- 赏金记录 -->
+					<div
+						id="bountyRecordsSection"
+						class="bounty-records"
+						style="display: none"
+					>
+						<div class="records-title">赏金记录</div>
+						<div id="bountyRecordsList" class="bounty-list">
+							<!-- 赏金记录将在这里动态生成 -->
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 结算结果 -->
+			<div id="resultsSection" style="display: none">
+				<div class="card">
+					<div class="card-title">最终结算结果</div>
+
+					<!-- 净收益和结算金额计算公式说明 -->
+					<div class="net-result-formula-header">
+						<div class="net-result-formula-text">
+							净收益 = (奖金 + 赏金 - 进场费 - 被赏金 - 饭费)
+						</div>
+						<div class="net-result-formula-text">
+							结算金额 = (奖金 + 赏金 - 饭费)
+						</div>
+					</div>
+
+					<div class="result-list" id="resultsList">
+						<!-- 结算结果将在这里动态生成 -->
+					</div>
+				</div>
+			</div>
+
+			<!-- 操作按钮 -->
+			<div class="actions-section" id="actionsSection" style="display: none">
+				<button class="btn" onclick="finishSettlement()">完成结算</button>
+			</div>
+
+			<!-- 加载状态 -->
+			<div id="loadingSection" class="loading" style="display: none">
+				正在计算结算结果...
+			</div>
+		</div>
+
+		<script src="storage.js"></script>
+		<script src="settlement.js"></script>
+	</body>
+</html>

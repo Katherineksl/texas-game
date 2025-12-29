@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>德州扑克管理 - 游戏大厅</title>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<nav class="navbar">
+			<div class="nav-container">
+				<h1 class="nav-title">德州扑克管理</h1>
+				<div class="nav-tabs">
+					<a href="index.html" class="nav-tab active">游戏大厅</a>
+					<a href="game.html" class="nav-tab">游戏管理</a>
+				</div>
+			</div>
+		</nav>
+
+		<div class="container">
+			<!-- 用户信息 -->
+			<div class="card" id="userCard" style="display: none">
+				<div class="card-title">欢迎回来，<span id="userName"></span></div>
+			</div>
+
+			<!-- 操作按钮 -->
+			<div class="card">
+				<div class="action-buttons">
+					<button class="btn" onclick="createGame()">创建新游戏</button>
+				</div>
+			</div>
+
+			<!-- 活跃游戏列表 -->
+			<div class="card">
+				<div class="card-title">活跃游戏</div>
+				<div id="loading" class="loading">加载中...</div>
+				<div id="noGames" class="card-content" style="display: none">
+					暂无活跃游戏
+				</div>
+				<div id="gamesList">
+					<!-- 游戏列表将在这里动态生成 -->
+				</div>
+			</div>
+		</div>
+
+		<script src="storage.js"></script>
+		<script src="index.js"></script>
+	</body>
+</html>

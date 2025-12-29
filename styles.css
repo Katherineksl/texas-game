@@ -1,0 +1,523 @@
+/* styles.css - 全局样式 */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		"Helvetica Neue", Arial, sans-serif;
+	background-color: #f5f5f5;
+	color: #333;
+	line-height: 1.6;
+}
+
+/* 导航栏样式 */
+.navbar {
+	background-color: #fff;
+	border-bottom: 1px solid #eee;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	position: sticky;
+	top: 0;
+	z-index: 100;
+}
+
+.nav-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 60px;
+}
+
+.nav-title {
+	font-size: 24px;
+	font-weight: bold;
+	color: #333;
+}
+
+.nav-tabs {
+	display: flex;
+	gap: 20px;
+}
+
+.nav-tab {
+	text-decoration: none;
+	color: #666;
+	padding: 8px 16px;
+	border-radius: 6px;
+	transition: all 0.3s;
+}
+
+.nav-tab:hover {
+	background-color: #f0f0f0;
+	color: #333;
+}
+
+.nav-tab.active {
+	background-color: #07c160;
+	color: white;
+}
+
+/* 容器样式 */
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+	min-height: calc(100vh - 60px);
+}
+
+/* 按钮样式 */
+.btn {
+	background-color: #07c160;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	padding: 12px 24px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	margin: 5px;
+}
+
+.btn:hover {
+	background-color: #06a550;
+}
+
+.btn:active {
+	transform: translateY(1px);
+}
+
+.btn-secondary {
+	background-color: #f0f0f0;
+	color: #333;
+}
+
+.btn-secondary:hover {
+	background-color: #e0e0e0;
+}
+
+.btn-danger {
+	background-color: #ff4757;
+	color: white;
+}
+
+.btn-danger:hover {
+	background-color: #ff3742;
+}
+
+/* 输入框样式 */
+.input {
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding: 12px;
+	margin: 5px 0;
+	font-size: 16px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.input:focus {
+	outline: none;
+	border-color: #07c160;
+	box-shadow: 0 0 0 2px rgba(7, 193, 96, 0.2);
+}
+
+/* 卡片样式 */
+.card {
+	background-color: white;
+	border-radius: 12px;
+	padding: 20px;
+	margin: 10px 0;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 16px;
+	color: #333;
+}
+
+.card-content {
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 8px;
+}
+
+/* 列表样式 */
+.list-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 16px 0;
+	border-bottom: 1px solid #eee;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.list-item:hover {
+	background-color: #f8f9fa;
+}
+
+.list-item:last-child {
+	border-bottom: none;
+}
+
+.list-item:active {
+	background-color: #f0f0f0;
+}
+
+/* 状态指示器 */
+.status-active {
+	color: #07c160;
+	font-weight: bold;
+	font-size: 12px;
+	background-color: #e8f5e8;
+	padding: 4px 8px;
+	border-radius: 12px;
+}
+
+/* 积分显示 */
+.score-positive {
+	color: #07c160;
+	font-weight: bold;
+}
+
+.score-negative {
+	color: #ff4757;
+	font-weight: bold;
+}
+
+/* 表单样式 */
+.form-group {
+	margin-bottom: 16px;
+}
+
+.label {
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 8px;
+	display: block;
+}
+
+.form-actions {
+	display: flex;
+	gap: 12px;
+	justify-content: flex-end;
+	margin-top: 20px;
+}
+
+/* 加载状态 */
+.loading {
+	text-align: center;
+	padding: 20px;
+	color: #666;
+	font-size: 16px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+	.nav-container {
+		flex-direction: column;
+		height: auto;
+		padding: 16px 20px;
+	}
+
+	.nav-tabs {
+		margin-top: 16px;
+	}
+
+	.container {
+		padding: 16px;
+	}
+
+	.card {
+		padding: 16px;
+	}
+
+	.btn {
+		padding: 10px 20px;
+		font-size: 14px;
+	}
+}
+
+/* 玩家选择相关样式 */
+.player-selection-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+	gap: 12px;
+	margin-bottom: 20px;
+}
+
+.player-option {
+	background-color: #f8f9fa;
+	border: 2px solid #dee2e6;
+	border-radius: 8px;
+	padding: 12px;
+	text-align: center;
+	cursor: pointer;
+	transition: all 0.3s;
+	position: relative;
+}
+
+.player-option:hover {
+	border-color: #07c160;
+	background-color: #e8f5e8;
+}
+
+.player-option.selected {
+	border-color: #07c160;
+	background-color: #e8f5e8;
+}
+
+.player-option-text {
+	font-weight: bold;
+	margin-bottom: 4px;
+}
+
+.player-option-check {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	color: #07c160;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.player-selection-actions {
+	display: flex;
+	gap: 12px;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+/* 自定义玩家输入 */
+.custom-player-section {
+	margin-top: 20px;
+	padding-top: 20px;
+	border-top: 1px solid #eee;
+}
+
+.custom-player-input-container {
+	display: flex;
+	gap: 12px;
+	margin-bottom: 16px;
+}
+
+.custom-player-input {
+	flex: 1;
+	padding: 12px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	font-size: 16px;
+}
+
+.btn-add-custom {
+	padding: 12px 20px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.btn-add-custom:hover {
+	background-color: #0056b3;
+}
+
+/* 赏金表单 */
+.bounty-form {
+	background-color: #f8f9fa;
+	padding: 20px;
+	border-radius: 8px;
+	margin: 20px 0;
+}
+
+/* 结算相关样式 */
+.settlement-summary {
+	background-color: #f8f9fa;
+	padding: 16px;
+	border-radius: 8px;
+	margin: 16px 0;
+}
+
+.summary-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 8px 0;
+	border-bottom: 1px solid #eee;
+}
+
+.summary-item:last-child {
+	border-bottom: none;
+}
+
+.summary-item.highlight {
+	background-color: #e8f5e8;
+	padding: 12px;
+	border-radius: 6px;
+	font-weight: bold;
+}
+
+.summary-label {
+	font-weight: 500;
+}
+
+.summary-value {
+	font-weight: bold;
+}
+
+.meal-cost-red {
+	color: #ff4757 !important;
+}
+
+.calculation-formula {
+	font-size: 12px;
+	color: #666;
+	font-style: italic;
+	margin-top: 4px;
+}
+
+/* 结算结果样式 */
+.result-list {
+	margin-top: 20px;
+}
+
+.result-item {
+	border: 1px solid #eee;
+	border-radius: 8px;
+	padding: 16px;
+	margin-bottom: 16px;
+	background-color: #fafafa;
+}
+
+.result-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 12px;
+}
+
+.rank-badge {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background-color: #07c160;
+	color: white;
+	text-align: center;
+	line-height: 32px;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.player-name {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.player-score {
+	color: #666;
+	font-size: 14px;
+}
+
+.result-details {
+	margin-left: 40px;
+}
+
+.detail-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 4px 0;
+	font-size: 14px;
+}
+
+.detail-label {
+	font-weight: 500;
+}
+
+.detail-value {
+	font-weight: bold;
+}
+
+.result-total {
+	border-top: 1px solid #ddd;
+	padding-top: 8px;
+	margin-top: 8px;
+	font-size: 16px;
+}
+
+/* 动作按钮区域 */
+.actions-section {
+	text-align: center;
+	margin-top: 30px;
+	padding-top: 20px;
+	border-top: 1px solid #eee;
+}
+
+/* 表格样式 */
+.table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 20px 0;
+}
+
+.table th,
+.table td {
+	padding: 12px;
+	text-align: left;
+	border-bottom: 1px solid #eee;
+}
+
+.table th {
+	background-color: #f8f9fa;
+	font-weight: bold;
+}
+
+/* 模态框样式 */
+.modal {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 1000;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal.show {
+	display: flex;
+}
+
+.modal-content {
+	background-color: white;
+	border-radius: 12px;
+	padding: 24px;
+	max-width: 500px;
+	width: 90%;
+	max-height: 80vh;
+	overflow-y: auto;
+}
+
+.modal-title {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 16px;
+}
+
+.modal-actions {
+	display: flex;
+	gap: 12px;
+	justify-content: flex-end;
+	margin-top: 20px;
+}
