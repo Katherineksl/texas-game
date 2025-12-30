@@ -60,6 +60,7 @@ function showGameManagement() {
 
 	loadPlayers();
 	updateGameInfo();
+	renderBountyRecords(); // 显示赏金记录
 }
 
 // 渲染默认玩家选择
